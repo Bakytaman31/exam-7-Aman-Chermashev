@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Menu from "./Components/Menu/Menu";
+import Basket from "./Components/Basket/Basket";
 
 class App extends Component {
   state = {
@@ -21,9 +22,7 @@ class App extends Component {
     goods[goodName].count++;
     let totalPrice = this.state.totalPrice;
     totalPrice += good.price;
-    let goodPrice = good.price * goods[goodName].count;
     this.setState({goods, totalPrice});
-    console.log(goods[goodName].count, good.name, goodPrice);
   };
 
   removeGood = good => {
@@ -39,6 +38,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Basket
+            totalPrice={this.state.totalPrice}
+            order={this.state.goods}
+            remove={this.removeGood}
+        />
         <Menu addGood={this.addGood}/>
       </div>
     );
